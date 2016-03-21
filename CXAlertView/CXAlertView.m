@@ -105,6 +105,7 @@ static BOOL __cx_statsu_prefersStatusBarHidden;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *containerView;
 @property (nonatomic, strong) CXBlurView *blurView;
+@property (nonatomic, strong) UILabel *messageLabel;
 
 @property (nonatomic, assign, getter = isLayoutDirty) BOOL layoutDirty;
 
@@ -165,6 +166,8 @@ static BOOL __cx_statsu_prefersStatusBarHidden;
         appearance.viewBackgroundColor = [UIColor whiteColor];
         appearance.titleColor = [UIColor blackColor];
         appearance.titleFont = [UIFont boldSystemFontOfSize:20];
+        appearance.messageColor = [UIColor blackColor];
+        appearance.messageFont = [UIFont boldSystemFontOfSize:17];
         appearance.buttonFont = [UIFont systemFontOfSize:[UIFont buttonFontSize]];
         appearance.buttonColor = [UIColor colorWithRed:0.0f green:0.5f blue:1.0f alpha:1.0f];
         appearance.cancelButtonColor = [UIColor colorWithRed:0.0f green:0.5f blue:1.0f alpha:1.0f];
@@ -207,7 +210,8 @@ static BOOL __cx_statsu_prefersStatusBarHidden;
     messageLabel.frame = CGRectMake( self.vericalPadding, 0, self.containerWidth - self.vericalPadding*2, [self heightWithText:message font:messageLabel.font]);
 
 	messageLabel.lineBreakMode=LBM;
-
+    _messageLabel = messageLabel;
+    
     return  [self initWithTitle:title contentView:messageLabel cancelButtonTitle:cancelButtonTitle];
 }
 
@@ -1076,6 +1080,22 @@ static BOOL __cx_statsu_prefersStatusBarHidden;
     }
     _titleColor = titleColor;
     self.titleLabel.textColor = titleColor;
+}
+
+- (void)setMessageColor:(UIColor *)messageColor {
+    if (_messageColor == messageColor) {
+        return;
+    }
+    _messageColor = messageColor;
+    self.messageLabel.textColor = messageColor;
+}
+
+- (void)setMessageFont:(UIFont *)messageFont {
+    if (_messageFont == messageFont) {
+        return;
+    }
+    _messageFont = messageFont;
+    self.messageLabel.font = messageFont;
 }
 
 - (void)setButtonFont:(UIFont *)buttonFont
