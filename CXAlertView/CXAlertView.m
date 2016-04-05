@@ -1096,6 +1096,7 @@ static BOOL __cx_statsu_prefersStatusBarHidden;
     }
     _messageFont = messageFont;
     self.messageLabel.font = messageFont;
+    [self updateMessageLabelSize];
 }
 
 - (void)setButtonFont:(UIFont *)buttonFont
@@ -1197,4 +1198,11 @@ static BOOL __cx_statsu_prefersStatusBarHidden;
     _showButtonLine = showButtonLine;
     [self updateBottomScrollView];
 }
+
+- (void)updateMessageLabelSize {
+    NSString *messageText = self.messageLabel.text;
+    UIFont *messageLabelFont = self.messageLabel.font;
+    self.messageLabel.frame = CGRectMake( self.vericalPadding, 0, self.containerWidth - self.vericalPadding*2, [self heightWithText:messageText font:messageLabelFont]);
+}
+
 @end
